@@ -1,0 +1,118 @@
+<html>
+<head>
+<link href="/static/style/blueTable.css" rel="stylesheet" type="text/css" />
+<link href="/static/style/greenTable.css" rel="stylesheet" type="text/css" />
+
+<link href="/static/style/menu.css" rel="stylesheet" type="text/css" />
+<title>Plot</title>
+<script>
+function navi1(){
+document.getElementById("graph").action ="/stock"
+ document.getElementById("graph").submit();
+}
+function navi2(){
+document.getElementById("graph").action ="/compare"
+ document.getElementById("graph").submit();
+}
+</script>
+
+</head>
+<body bgcolor="A6ABA8">
+<form id="graph">
+<div id="navbar">
+
+        <ul>
+            <li onClick="navi1();">Stock History</li>
+            <li onClick="navi2();">Compare Company</li>
+        </ul>
+
+    </div>
+<table>
+<tr>
+<td>
+
+{{currData.1}}
+<b>Live Stock:</b>
+<table border="1" align="center">
+<tr>
+<td colspan="2">
+{{stock1.0}}
+</td>
+</tr>
+<tr>
+<td>{{stock1.1}}</td>
+<td><img src="/static/{{stock1.3}}" alt="My image" height="15" width="15"/>{{stock1.2}}</td>
+</tr>
+</table>
+
+<div style="overflow:auto ;  width: 450px; height: 500px">
+<table class="CSSTableGeneratorB" border="1" style="width:450px">
+<tr>
+  <td>Date</td>
+  {% ifequal type 'open' %}<td>Open</td>{% endifequal %}
+  {% ifequal type 'high' %}<td>High</td>{% endifequal %}
+  {% ifequal type 'low' %}<td>Low</td>{% endifequal %}
+  {% ifequal type 'close' %}<td>Close</td>{% endifequal %}
+  <td>Volume</td>
+  <td>Adj Close</td>
+</tr>
+  {% for t in dataList %}
+  <tr>
+	<td>{{t.0}}</td>
+	{% ifequal type 'open' %}<td>{{t.1}}</td>{% endifequal %}
+	{% ifequal type 'high' %}<td>{{t.2}}</td>{% endifequal %}
+	{% ifequal type 'low' %}<td>{{t.3}}</td>{% endifequal %}
+	{% ifequal type 'close' %}<td>{{t.4}}</td>{% endifequal %}
+	<td>{{t.5}}</td>
+	<td>{{t.6}}</td>
+  </tr>
+  {% endfor %}
+</table>
+</div> 
+</td>
+<td colspan ='4' align="justify"> <img src="{{ imageUri }}"/></td>
+{% if dataList1%}
+<td>
+<b>Live Stock:</b>
+<table border="1" align="center">
+<tr>
+<td colspan="2">
+{{stock2.0}}
+</td>
+</tr>
+<tr>
+<td>{{stock2.1}}</td>
+<td><img src="/static/{{stock2.3}}" alt="My image" height="15" width="15"/>{{stock2.2}}</td>
+</tr>
+</table>
+<div style="overflow:auto ;  width: 450px; height: 500px">
+<table border="1" class = "CSSTableGenerator" style="width:450px">
+<tr>
+  <td>Date</td>
+  {% ifequal type 'open' %}<td>Open</td>{% endifequal %}
+  {% ifequal type 'high' %}<td>High</td>{% endifequal %}
+  {% ifequal type 'low' %}<td>Low</td>{% endifequal %}
+  {% ifequal type 'close' %}<td>Close</td>{% endifequal %}
+  <td>Volume</td>
+  <td>Adj Close</td>
+</tr>
+  {% for t in dataList1 %}
+  <tr>
+	<td>{{t.0}}</td>
+	{% ifequal type 'open' %}<td>{{t.1}}</td>{% endifequal %}
+	{% ifequal type 'high' %}<td>{{t.2}}</td>{% endifequal %}
+	{% ifequal type 'low' %}<td>{{t.3}}</td>{% endifequal %}
+	{% ifequal type 'close' %}<td>{{t.4}}</td>{% endifequal %}
+	<td>{{t.5}}</td>
+	<td>{{t.6}}</td>
+  </tr>
+  {% endfor %}
+</table>
+</div> 
+</td>
+{% endif %}
+</tr>
+</table>
+</form>
+</body>
+</html>

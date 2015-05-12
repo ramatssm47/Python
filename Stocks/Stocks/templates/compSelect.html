@@ -1,0 +1,122 @@
+<html>
+<head>
+<script>
+function myFunction() {
+comp=document.forms[0].comp.value;
+type=document.forms[0].type.value;
+name = document.forms[0].comp.options[document.forms[0].comp.selectedIndex].text;
+ document.getElementById("myForm").action ="/pageSubmit/"+comp+"/"+type;
+ document.getElementById("myForm").submit();
+}
+
+function compare(){
+document.getElementById("myForm").action ="/compare"
+ document.getElementById("myForm").submit();
+}
+
+function navi1(){
+document.getElementById("myForm").action ="/stock"
+ document.getElementById("myForm").submit();
+}
+function navi2(){
+document.getElementById("myForm").action ="/compare"
+ document.getElementById("myForm").submit();
+}
+
+</script>
+<style>
+#navbar {
+width:100%;
+height:40px;
+background-color:8683EE;
+}
+
+#navbar ul {
+width:80%;
+margin:0 auto 0 auto;
+}
+
+#navbar ul li {
+float:left;
+color:#CC0000;
+padding:0 20px 0 20px;
+border-right:1px solid #FFF;
+border-left:1px solid #FFF;
+height:40px;
+list-style:none;
+display:block;
+line-height:30px;
+text-align:center;
+cursor:pointer;
+}
+
+#navbar ul li:hover {
+background-color:#CCC;
+}
+
+</style>
+<link href="Menu.css" rel="stylesheet" type="text/css" />
+</head>
+<body bgcolor="A6ABA8">
+<div id="navbar">
+
+        <ul>
+            <li id="tab1" onClick="navi1();">Stock History</li>
+            <li onClick="navi2();">Compare Company</li>
+        </ul>
+
+    </div>
+    
+<form id="myForm" action="/pageSubmit/">
+<!--<p style="background-color:D2EFF8;font-family:calibri;color:blue;font-size:20px;align:center">
+Online Stock comparison tool would assist users in stock market investment decisions. It would help the users to study the stock history of the companies, so that they can make better decision in Stock market investment. This online tool will give the detailed report of the stock details of companies with the past and present data. This tool helps the users to compare the stock data between companies with different parameters.
+</p>--!>
+<table>
+<tr>
+<td colspan="2" align="center"> <H1 style="color:55AE1E">Online Stock Comparison Tool</H1> </td>
+</tr>
+<tr>
+<td width="60%" align="center">
+<br><br>
+<img src="/static/images/stock-market.jpg"/>
+</td>
+<td align="center">
+<table align="center">
+<tr><td colspan="2" style="font-family:calibri;color:blue;">Generate Stock History </td></tr>
+<tr height="10"></tr>
+<tr>
+<tr>
+<td> Select Company </td>
+<td>
+<select id="comp">
+{% for t in stocks %}
+	<option value="{{ t.0 }}">{{ t.1 }}</option>
+{% endfor %}
+</select>
+<td>
+</tr>
+<tr>
+<td> Select Frequency </td>
+<td align="center">
+<select id="type">
+
+	<option value="open">Open</option>
+	<option value="high">High</option>
+	<option value="low">Low</option>
+	<option value="close">Close</option>
+</select>
+<td>
+</tr>
+<tr>
+<td align="center" colspan="2">
+<button type="button" onClick="myFunction();">Generate Chart</button>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</form>
+
+</body>
+</html>
